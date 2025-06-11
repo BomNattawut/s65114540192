@@ -188,10 +188,3 @@ STATIC_URL = "static/"
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '10.0.2.2',]
 
-DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'  # หรือ SMTP Server ที่คุณใช้
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'testsmarthwithyou01@gmail.com'  # อีเมลที่ใช้ส่ง
-EMAIL_HOST_PASSWORD = 'jzuj dsbq kipk xzaa'  # รหัสผ่านของอีเมล
