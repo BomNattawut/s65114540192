@@ -4,6 +4,8 @@ import 'package:myflutterproject/scr/login.dart';
 import 'package:myflutterproject/scr/Home.dart';
 
 class IntroPage extends StatefulWidget {
+  const IntroPage({super.key});
+
   @override
   _IntroPageState createState() => _IntroPageState();
 }
@@ -41,7 +43,7 @@ class _IntroPageState extends State<IntroPage> {
   Widget build(BuildContext context) {
     if (_isLoading) {
       // แสดง loading จนกว่าจะตรวจสอบสถานะการล็อกอินเสร็จ
-      return Scaffold(
+      return const Scaffold(
         backgroundColor: Colors.black,
         body: Center(
           child: CircularProgressIndicator(color: Colors.orange),
@@ -87,20 +89,20 @@ class _IntroPageState extends State<IntroPage> {
                 buildIndicator(isActive: i == _currentPage),
             ],
           ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           _currentPage == 2
               ? ElevatedButton(
                   onPressed: () {
                     Navigator.pushReplacement(
                       context,
-                      MaterialPageRoute(builder: (context) => Loginpage()),
+                      MaterialPageRoute(builder: (context) => const Loginpage()),
                     );
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.orange,
-                    padding: EdgeInsets.symmetric(horizontal: 40, vertical: 15),
+                    padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 15),
                   ),
-                  child: Text(
+                  child: const Text(
                     "Get Started",
                     style: TextStyle(color: Colors.white, fontSize: 18),
                   ),
@@ -108,15 +110,15 @@ class _IntroPageState extends State<IntroPage> {
               : TextButton(
                   onPressed: () {
                     _pageController.animateToPage(2,
-                        duration: Duration(milliseconds: 500),
+                        duration: const Duration(milliseconds: 500),
                         curve: Curves.easeInOut);
                   },
-                  child: Text(
+                  child: const Text(
                     "Skip",
                     style: TextStyle(color: Colors.white70, fontSize: 16),
                   ),
                 ),
-          SizedBox(height: 30),
+          const SizedBox(height: 30),
         ],
       ),
     );
@@ -129,17 +131,17 @@ class _IntroPageState extends State<IntroPage> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Image.asset(imagePath, height: 250),
-          SizedBox(height: 30),
+          const SizedBox(height: 30),
           Text(
             title,
-            style: TextStyle(
+            style: const TextStyle(
                 color: Colors.white, fontSize: 24, fontWeight: FontWeight.bold),
             textAlign: TextAlign.center,
           ),
-          SizedBox(height: 15),
+          const SizedBox(height: 15),
           Text(
             description,
-            style: TextStyle(color: Colors.white70, fontSize: 16),
+            style: const TextStyle(color: Colors.white70, fontSize: 16),
             textAlign: TextAlign.center,
           ),
         ],
@@ -149,8 +151,8 @@ class _IntroPageState extends State<IntroPage> {
 
   Widget buildIndicator({required bool isActive}) {
     return AnimatedContainer(
-      duration: Duration(milliseconds: 300),
-      margin: EdgeInsets.symmetric(horizontal: 5),
+      duration: const Duration(milliseconds: 300),
+      margin: const EdgeInsets.symmetric(horizontal: 5),
       height: 10,
       width: isActive ? 20 : 10,
       decoration: BoxDecoration(

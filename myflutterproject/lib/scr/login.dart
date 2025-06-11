@@ -1,9 +1,12 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:myflutterproject/scr/Home.dart';
+import 'package:myflutterproject/scr/auth_service/Authservice.dart';
 import 'package:myflutterproject/scr/register.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
+
+import 'package:firebase_messaging/firebase_messaging.dart';
 
 class Loginpage extends StatefulWidget {
   const Loginpage({super.key});
@@ -17,7 +20,7 @@ class _LoginpageState extends State<Loginpage> {
   final TextEditingController _passwordController = TextEditingController();
 
   Future<void> login() async {
-    final String apiUrl = 'http://10.0.2.2:8000/Smartwityouapp/Login/';
+    const String apiUrl = 'http://10.0.2.2:8000/Smartwityouapp/Login/';
 
     try {
       final response = await http.post(
@@ -28,29 +31,38 @@ class _LoginpageState extends State<Loginpage> {
           'password': _passwordController.text,
         }),
       );
-       print(response.body);
+      print(response.body);
       if (response.statusCode == 200) {
-        
         // เก็บข้อมูลผู้ใช้ใน SharedPreferences
-         final responseBody = json.decode(response.body);
+        final responseBody = json.decode(response.body);
         final accessToken = responseBody['access_token'];
         final refreshToken = responseBody['token'];
+        final userid = responseBody['id'];
 
         final prefs = await SharedPreferences.getInstance();
         prefs.setString('user_email', _usernameController.text);
-        prefs.setString('access_token', accessToken); 
-        prefs.setString('refresh_token', refreshToken); 
+        prefs.setString('access_token', accessToken);
+        prefs.setString('refresh_token', refreshToken);
+        prefs.setString('userid', userid);
+
+        await AuthService.saveLoginStatus(true);
+        
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Login successful')),
+          const SnackBar(content: Text('เข้าสู่ระบบเเล้ว')),
         );
-        // ไปหน้า Home หลังจาก Login สำเร็จ
+        
+        String? fcmToken = await FirebaseMessaging.instance.getToken();
+        if (fcmToken != null) {
+        
+          await sendFcmTokenToServer(fcmToken);
+        }
         Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => HomePage()),
         );
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Login failed: ${response.body}')),
+          SnackBar(content: Text('รหัสผ่านหรืออีเมลไม่ถูกต้อง')),
         );
       }
     } catch (e) {
@@ -60,6 +72,37 @@ class _LoginpageState extends State<Loginpage> {
     }
   }
 
+  Future<void> sendFcmTokenToServer(String token) async {
+    const String apiUrl = 'http://10.0.2.2:8000/Smartwityouapp/saveFCMtoken/';
+
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      final userId = prefs.getString('userid');
+      String? accessToken = prefs.getString('access_token');
+
+      if (userId != null) {
+        final response = await http.post(
+          Uri.parse(apiUrl),
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer $accessToken',
+          },
+          body: json.encode({
+            'user_id': userId,
+            'fcm_token': token,
+          }),
+        );
+
+        if (response.statusCode == 200) {
+          print('FCM Token updated successfully');
+        } else {
+          print('Failed to update FCM Token');
+        }
+      }
+    } catch (e) {
+      print('Error updating FCM Token: $e');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -72,15 +115,30 @@ class _LoginpageState extends State<Loginpage> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             const SizedBox(height: 100),
-            _buildTextField("Email", Icons.person, _usernameController, false),
+            Center(
+                child: Image.asset(
+              'assets/images/icon.png', // พาธของไฟล์รูปภาพ
+              height: 200, // ปรับขนาดความสูง
+              width: 200, // ปรับขนาดความกว้าง
+              fit: BoxFit.cover, // จัดการการแสดงผลของรูป
+            )),
+           
+            Center(
+              child: Text(
+                'Smartwithyou',
+                style: TextStyle(color: Colors.orange, fontSize: 20),
+              ),
+            ),
+            const SizedBox(height: 30),
+            _buildTextField("อีเมล", Icons.person, _usernameController, false),
             const SizedBox(height: 12),
-            _buildTextField("Password", Icons.lock, _passwordController, true),
+            _buildTextField("รหัสผ่าน", Icons.lock, _passwordController, true),
             const SizedBox(height: 20),
             ElevatedButton(
               onPressed: login,
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.orange,
-                padding: EdgeInsets.symmetric(vertical: 16),
+                padding: const EdgeInsets.symmetric(vertical: 16),
               ),
               child: const Text(
                 "Login",
@@ -88,23 +146,23 @@ class _LoginpageState extends State<Loginpage> {
               ),
             ),
             const SizedBox(height: 20),
-            _socialLoginSection(),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const Text(
-                  "Don't have an account?",
+                  "ไม่มีบัญชีใช่ไหม?",
                   style: TextStyle(color: Colors.white),
                 ),
                 TextButton(
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => Registerpage()),
+                      MaterialPageRoute(
+                          builder: (context) => const Registerpage()),
                     );
                   },
                   child: const Text(
-                    "Register",
+                    "ลงทะเบียน",
                     style: TextStyle(color: Colors.orange),
                   ),
                 ),
@@ -124,40 +182,12 @@ class _LoginpageState extends State<Loginpage> {
       decoration: InputDecoration(
         labelText: label,
         prefixIcon: Icon(icon, color: Colors.white),
-        border: OutlineInputBorder(),
+        border: const OutlineInputBorder(),
         filled: true,
         fillColor: Colors.white24,
-        labelStyle: TextStyle(color: Colors.white),
+        labelStyle: const TextStyle(color: Colors.white),
       ),
-      style: TextStyle(color: Colors.white),
-    );
-  }
-
-  Widget _socialLoginSection() {
-    return Column(
-      children: [
-        const Text(
-          "Or",
-          style: TextStyle(color: Colors.white, fontSize: 20),
-        ),
-        const SizedBox(height: 20),
-        _socialLoginButton("Login with Google", Icons.email, Colors.red),
-      ],
-    );
-  }
-
-  Widget _socialLoginButton(String text, IconData icon, Color color) {
-    return ElevatedButton.icon(
-      onPressed: () {},
-      icon: Icon(icon, color: Colors.white),
-      label: Text(
-        text,
-        style: const TextStyle(color: Colors.white, fontSize: 16),
-      ),
-      style: ElevatedButton.styleFrom(
-        backgroundColor: color,
-        padding: EdgeInsets.symmetric(vertical: 12),
-      ),
+      style: const TextStyle(color: Colors.white),
     );
   }
 }

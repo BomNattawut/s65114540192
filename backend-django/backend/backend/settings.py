@@ -12,7 +12,9 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from pathlib import Path
 from datetime import timedelta
-
+import os
+import firebase_admin
+from firebase_admin import credentials
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -33,18 +35,36 @@ ALLOWED_HOSTS = []
 AUTH_USER_MODEL = 'Smartwityouapp.CustomUser'
 
 INSTALLED_APPS = [
+    
+    
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
+    
     "django.contrib.staticfiles",
     "Smartwityouapp",
     "rest_framework",
     'rest_framework_simplejwt',
     'rest_framework_simplejwt.token_blacklist',
     'corsheaders',
+     'channels',
+
+    
+    
 ]
+cred = credentials.Certificate("D:/Seniaproject/backend-django/backend/backend/firebasekey/senaiaproject-firebase-adminsdk-m6278-7e1ab04adc.json")
+firebase_admin.initialize_app(cred)
+ASGI_APPLICATION = 'backend.asgi.application'
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [('127.0.0.1', 6379)],
+        },
+    },
+}
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.SessionAuthentication',
@@ -53,12 +73,12 @@ REST_FRAMEWORK = {
          
     ),
 }
-CORS_ALLOWED_ORIGINS = [
-    'http://localhost:8000',  # URL ที่จะให้เข้าถึง API
-]
+#CORS_ALLOWED_ORIGINS = ['http://localhost:8000','http://127.0.0.1:8000']  URL ที่จะให้เข้าถึง API
+CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_METHODS = ["GET", "POST", "OPTIONS",'PUT','DELETE']
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=30),  # Access Token มีอายุ 30 นาที
-    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),     # Refresh Token มีอายุ 1 วัน
+    'ACCESS_TOKEN_LIFETIME': timedelta(hours=168),  # Access Token มีอายุ 30 นาที
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=30),     # Refresh Token มีอายุ 1 วัน
     'ROTATE_REFRESH_TOKENS': True,                  # หมุนเวียน Refresh Token ใหม่
     'BLACKLIST_AFTER_ROTATION': True,               # ใช้สำหรับทำ Token Blacklist
 }
@@ -73,7 +93,22 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     
     
+    
+    
 ]
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels.layers.InMemoryChannelLayer",  # หรือใช้ Redis
+        # "BACKEND": "channels_redis.core.RedisChannelLayer",
+        # "CONFIG": {
+        #     "hosts": [("127.0.0.1", 6379)],
+        # },
+    },
+}
+
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 ROOT_URLCONF = "backend.urls"
 
@@ -110,6 +145,7 @@ DATABASES = {
         
     }
 }
+
 
 
 # Password validation
@@ -150,7 +186,7 @@ STATIC_URL = "static/"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '10.0.2.2']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '10.0.2.2',]
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
