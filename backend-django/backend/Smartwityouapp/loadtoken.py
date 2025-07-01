@@ -1,6 +1,7 @@
 import json
 import os
-from google.oauth2.credentials import Credentials
+from google.oauth2.credentials import Credentials # type: ignore
+
 
 
 def load_credentials(user_id):
