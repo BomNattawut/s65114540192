@@ -1,5 +1,5 @@
 # 1. clone project
-# 2. เข้าไปที่โฟลเดอร์ backend-django เเล้วใช้ คำสั่ง pip -r requirement.txt
+# 2. เข้าไปที่โฟลเดอร์ backend-django เเล้วใช้ คำสั่ง pip install -r requirement.txt
 # 3. เข้าไป โฟลเดอรื myflutterproject กับ admin_panel เเละ รัน flutter pub get ในทั้งสองโฟลเดอรื
 # 4. เข้าไปตั้งค่า database ใน setting.py
 # 5. ใช้คำสั่ง makemigrations
