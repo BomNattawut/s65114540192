@@ -54,7 +54,8 @@ INSTALLED_APPS = [
     
     
 ]
-cred = credentials.Certificate("D:/Seniaproject/backend-django/backend/backend/firebasekey/senaiaproject-firebase-adminsdk-m6278-7e1ab04adc.json")
+cred_path = BASE_DIR / "backend/firebasekey/senaiaproject-firebase-adminsdk-m6278-7e1ab04adc.json"
+cred = credentials.Certificate(cred_path)
 firebase_admin.initialize_app(cred)
 ASGI_APPLICATION = 'backend.asgi.application'
 CHANNEL_LAYERS = {
@@ -135,7 +136,7 @@ WSGI_APPLICATION = "backend.wsgi.application"
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 DATABASES = {
-    "default": {
+    "mysql": {
         "ENGINE": "django.db.backends.mysql",
         "NAME":"myprojectdatabases",
         "USER":"user1",
@@ -143,6 +144,10 @@ DATABASES = {
         "HOST":"localhost",
         "PORT":'3306',
         
+    },
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 

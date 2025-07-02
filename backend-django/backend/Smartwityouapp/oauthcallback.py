@@ -2,14 +2,16 @@ from django.http import JsonResponse, HttpResponseRedirect
 from google_auth_oauthlib.flow import Flow
 import json
 import os
+from pathlib import Path
 
 # 🔹 กำหนดไฟล์ Credentials และโฟลเดอร์สำหรับเก็บ Token
-CREDENTIALS_FILE = "D:/Seniaproject/backend-django/backend/Smartwityouapp/calender_api_service/client_secret_679774878907-bo7e2ropa8epijvmjfqqqsvtbq8ticqd.apps.googleusercontent.com.json"
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
+CREDENTIALS_FILE = BASE_DIR / "backend/Smartwityouapp/calender_api_service/client_secret_679774878907-bo7e2ropa8epijvmjfqqqsvtbq8ticqd.apps.googleusercontent.com.json"
 SCOPES = ["https://www.googleapis.com/auth/calendar.events"]
 REDIRECT_URI = "http://127.0.0.1:8000/Smartwityouapp/oauth2callback/"
 
 # 🔹 ตั้งค่าโฟลเดอร์เก็บ Token
-TOKEN_DIR = "D:/Seniaproject/backend-django/backend/Smartwityouapp/tokens/"
+TOKEN_DIR = BASE_DIR / "backend/Smartwityouapp/tokens/"
 TOKEN_FILE = os.path.join(TOKEN_DIR, "token.json")
 
 # ✅ ตรวจสอบและสร้างโฟลเดอร์หากยังไม่มี
@@ -38,7 +40,7 @@ def google_auth_callback(request):
         }
 
         # ✅ บันทึก Token ตาม User ID
-        token_path = f"D:/Seniaproject/backend-django/backend/Smartwityouapp/tokens/user_{user_id}.json"
+        token_path = BASE_DIR / f"backend/Smartwityouapp/tokens/user_{user_id}.json"
         with open(token_path, "w") as token_file:
             json.dump(token_data, token_file)
 
