@@ -29,23 +29,7 @@ services:
     networks:
       - mynetwork
 
-  client:
-    build:
-      context: ./myflutterproject
-      dockerfile: Dockerfile
-    ports:
-      - "8080:8080"
-      - "5554:5554"
-      - "5555:5555"
-    volumes:
-      - ./myflutterproject:/app
-    networks:
-      - mynetwork
-    environment:
-      ANDROID_HOME: /opt/android-sdk
-      PATH: /opt/android-sdk/tools:/opt/android-sdk/tools/bin:/opt/android-sdk/platform-tools:$PATH
-    stdin_open: true
-    tty: true
+ 
 
 
 networks:
