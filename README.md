@@ -12,7 +12,12 @@
 
 # 2.user สำหรับทดสอบpath http://127.0.0.1:8000/Smartwityouapp/Login/    (เป็นPOST) คือ emali: bangaro644@gmail.com password: tttt4321  
 #เนื่องจากbackendผมทำหน้าที่เป็นapiที่ไว้คุยกัยไคลเอนท์ที่เป็นflutter เลยไม่มีหน้าเว็บหรือtemplate ต้องทดสอบผ่านpostman หรือ อื่นเอานะครับ 
+ 
+# อย่าลืม ก็อป key ของ google service ที่อยู่ในเอกสารมาใส่ก่อน  ลิ๊งค์ https://docs.google.com/document/d/1xgJ1eGZI4EfC7coXaC04U1hc2PtXISrQTiBHkPKdNAE/edit?usp=sharing 
 
+
+
+======================================================================================================================================
 
 # 1. clone project
 # 2. สร้าง env เเละเปิดใช้งาน
