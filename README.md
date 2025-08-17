@@ -1,5 +1,16 @@
 
-# user สำหรับทดสอบpath http://127.0.0.1:8000/Smartwityouapp/Login/    (เป็นPOST) คือ emali: bangaro644@gmail.com password: tttt4321  
+# ขั้นตอน
+# 1.regiater userผ่าน http://127.0.0.1:8000/Smartwityouapp/Register/  โดยใช้ bodyที่เเนบไปกับrequestตามนี้  {
+    "email": "bangaro644@gmail.com",
+    "username":"tairone",
+    "age":20,
+    "gender":"man",
+    "password":"tttt4321"
+
+} ถ้าขึ้น request error 500 ไม่ต้องสนใจเเพราะมันเกี่ยวกับfrontend 
+
+
+# 2.user สำหรับทดสอบpath http://127.0.0.1:8000/Smartwityouapp/Login/    (เป็นPOST) คือ emali: bangaro644@gmail.com password: tttt4321  
 #เนื่องจากbackendผมทำหน้าที่เป็นapiที่ไว้คุยกัยไคลเอนท์ที่เป็นflutter เลยไม่มีหน้าเว็บหรือtemplate ต้องทดสอบผ่านpostman หรือ อื่นเอานะครับ 
 
 
