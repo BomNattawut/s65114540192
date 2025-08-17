@@ -1,1 +1,13 @@
-
+{
+    "type": "service_account",
+    "project_id": "senaiaproject",
+    "private_key_id": "dda49a1c339e7dfb4fec79e1d699578c43838efe",
+    "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDNN2mkhIg8R28c\nvT3C88JO/JeOk/FmvyA7c/V4Dx3QsZz7B9Hy00u66uxqGP1rdh3EkGF0SfigRWJd\nlE//jLKiZRzhSDJ0I+oDLrWWgriQdf9+Xix3LCjNdvf0aK3b+2vWIYHCMeGV8rSG\nh+roTUlOE03dYAxm7PYkmZe6PxdLoXDGVeJCc1YjRhmFriONDurOdL0A9FvFbPrj\nM6HO4BAWjkqslfbB5UdLAMLeWs+CN5ASYBaE/1k+dPPmzpxHPAVZXTGycid+b7Fo\n6jqJuto0O3W8BweYdDy5CXJlx3gjbMojmgiG19cKi0Gdet4DFi6f2gcLLWO2ixaZ\nePXfb13rAgMBAAECggEAHvcqkLGS4Q2iXYLMq/seKc8Bi3kVZvyV/4Ka2pflVtVG\nK7bdXje16KmELOpCaxGyojNrESIMSxrNIfO8MoJnfgul1PSQ8Gdu6zYEHobxFJNJ\njybkrMLUEVTPS2j0OwpwFiqOKuBd+sNZrCccMhtfYVGWYT4aAPnmllU6yNa2TCn1\n301Fu3TF1+XtMF0Vi/JDhDj2e8UWqYdqd1vTK76i+zU+qfdctTkeEnnbxk9W0qkI\nhaBBZgG3bpPelcn1afgWDBuCcl7nVYRLurdIj/WdNGkGE6/Zn6Kp+ZNVMBnXkv6Y\nlEJXU1RGErPGtPtqUe/my0ZQXC3ejn4GgIL+hkKM0QKBgQDvNHAcIXjgVdPTfK5p\ncToNUQT32WwjyToqHQQ3wHa7cVjIQ0fItfo52rcB+oNp/SGbvkVDWRb7JFmuKDbh\nCDt8BQTLy1PaQbSTavF7pFewfp63pCchaS0C6cBLL8TTMhBmRJS5w1qCxZo1l6/d\nvK8Hyy8CC4JtrlxWBjyXwtQqcwKBgQDboA3fYEKF1db/vlUu9qLkAEJEjZCy1J1e\nM9zEpbO87HH1rqgsOCNmz/GTHeddmS2VuBZlw8kpdyNLFg1OeCX+uT1iGbgUiHYE\nd4MvHIXZBJayvHfgMS+67frtfzFuYGMoYsN2BHOIiVcBsyhKkAVUkbHWXOHZXYSl\niOt3/hVIqQKBgQCVw3cNpcdQbWwaVU29pq559+fsZaxXG33XMCOb5FxyLx0vBTDE\ncWshHdbG3lm42ktYf2BOMlE5HCEp8POrIMRdeabvEXaGh+zO/34Bs3tTfXNR9uyo\n9njAAinq6RWKRSYPYZDcXXsltSI/u6DYa3IKpyPfW+VlVm1pTq5RNiIwEQKBgBad\nGFCTvMXDCuwyUNsREhyf2jLs0KVZNwroFCc7WJJvVhyR60cCUMLZTmpzfcspZoQv\n/D5mNmRKnBuzHZOi02ay9BsRwt56Xox/Mca8DRwXWNz2gvFWny+EKX4ixpgy3ILg\nCHgyZSL94TOPmupygdn/VmxYC/kxo+LXgkdMpixhAoGAYyp6vyhCgt8uq2A6RRm/\nwlQfTqhw9UD7JZF3a1SHXDBKRNfSFAfarM1cF/tUkUoceZEb+7idjFO29A0A5aqX\nsG2UD/cAt9qJMGgy5fQSyNL0qwWhlpfojHEXF54qOuPJr40qjzIn0WCpVhOFauDP\nlApIMc3X681Ylrq4pUiBUj4=\n-----END PRIVATE KEY-----\n",
+    "client_email": "google-calendar-service@senaiaproject.iam.gserviceaccount.com",
+    "client_id": "110875947470588512700",
+    "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+    "token_uri": "https://oauth2.googleapis.com/token",
+    "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+    "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/google-calendar-service%40senaiaproject.iam.gserviceaccount.com",
+    "universe_domain": "googleapis.com"
+  }
