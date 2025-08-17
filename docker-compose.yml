@@ -7,7 +7,7 @@ services:
       dockerfile: Dockerfile
     command: python manage.py runserver 0.0.0.0:8000 
     volumes:
-      - .:/app
+       - ./backend-django/backend:/app
     ports:
       - "8000:8000"
     env_file: .env 
@@ -19,7 +19,7 @@ services:
   db:
     image: mysql:8.0
     environment:
-      MYSQL_DATABASE: myprojectdatabases
+      MYSQL_DATABASE: mydatabases
       MYSQL_USER: user1
       MYSQL_PASSWORD: White450602
       MYSQL_ROOT_PASSWORD: rootpassword
