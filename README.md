@@ -11,7 +11,7 @@
 
 
 # 2.user สำหรับทดสอบpath http://127.0.0.1:8000/Smartwityouapp/Login/    (เป็นPOST) คือ emali: bangaro644@gmail.com password: tttt4321  
-#เนื่องจากbackendผมทำหน้าที่เป็นapiที่ไว้คุยกัยไคลเอนท์ที่เป็นflutter เลยไม่มีหน้าเว็บหรือtemplate ต้องทดสอบผ่านpostman หรือ อื่นเอานะครับ 
+#เนื่องจากbackendผมทำหน้าที่เป็นapiที่ไว้คุยกัยไคลเอนท์ที่เป็นflutter เลยไม่มีหน้าเว็บหรือtemplate ต้องทดสอบuiของกdjangoเอานะคับ
  
 
 
