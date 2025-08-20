@@ -5,7 +5,7 @@ services:
     build:
       context: ./backend-django/backend
       dockerfile: Dockerfile
-    command: python manage.py runserver 0.0.0.0:8000 
+    command: python manage.py runserver 0.0.0.0:8000
     volumes:
 
        - ./backend-django/backend:/app
@@ -20,29 +20,27 @@ services:
       - mynetwork
 
   db:
-    image: mysql:8.0
+    image: postgres:16
     environment:
-      MYSQL_DATABASE: mydatabases2
-      MYSQL_USER: user1
-      MYSQL_PASSWORD: White450602
-      MYSQL_ROOT_PASSWORD: rootpassword
+      POSTGRES_DB: mydatabases3
+      POSTGRES_USER: user1
+      POSTGRES_PASSWORD: White450602
     ports:
-      - "3307:3306"
+      - "5433:5432"   # ใช้ 5433 ภายนอกเครื่อง, 5432 ภายใน container
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "-uroot", "-prootpassword"]
+      test: ["CMD-SHELL", "pg_isready -U user1 -d mydatabases3"]
       interval: 5s
       timeout: 5s
-      retries: 10
-    volumes:
-      - db_data:/var/lib/mysql
+      retries: 5
     networks:
       - mynetwork
-
+volumes:
+  postgres_data:
  
 
 
 networks:
   mynetwork:
 
-volumes:
-  db_data:
