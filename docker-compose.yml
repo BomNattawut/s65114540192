@@ -5,13 +5,13 @@ services:
     build:
       context: ./backend-django/backend
       dockerfile: Dockerfile
-    command: python manage.py runserver 0.0.0.0:8000
+    command: python manage.py runserver 0.0.0.0:10192
     volumes:
 
        - ./backend-django/backend:/app
 
     ports:
-      - "8000:8000"
+      - "10192:10192"
     env_file: .env 
     depends_on:
       db:
@@ -26,7 +26,7 @@ services:
       POSTGRES_USER: user1
       POSTGRES_PASSWORD: White450602
     ports:
-      - "5433:5432"   # ใช้ 5433 ภายนอกเครื่อง, 5432 ภายใน container
+      - "20192:5432"   # ใช้ 5433 ภายนอกเครื่อง, 5432 ภายใน container
     volumes:
       - postgres_data:/var/lib/postgresql/data
     healthcheck:

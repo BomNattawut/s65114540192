@@ -22,6 +22,6 @@ RUN chmod 755 /usr/local/bin/entrypoint.sh
 
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
 
-EXPOSE 8000
+EXPOSE 10192
 
 CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
