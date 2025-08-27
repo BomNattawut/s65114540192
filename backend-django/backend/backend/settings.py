@@ -188,5 +188,5 @@ STATIC_URL = "static/"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '10.0.2.2','51.79.229.204','202.28.49.122']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '10.0.2.2','51.79.229.204','202.28.49.122','10.80.21.37']
 
