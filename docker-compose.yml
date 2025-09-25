@@ -1,29 +1,32 @@
 version: '3.8'
 
 services:
+
   backend:
     build:
       context: ./backend-django/backend
       dockerfile: Dockerfile
     command: python manage.py runserver 0.0.0.0:10192
     volumes:
-
-       - ./backend-django/backend:/app
-
-    ports:
-      - "${PORT}:${PORT}"
+      - ./backend-django/backend:/app
     env_file: .env 
     depends_on:
       db:
         condition: service_healthy
     networks:
-      - mynetwork
+      - traefik-public
+    labels:
+
+      - "traefik.enable=true"
+      - "traefik.http.routers.backend.rule=PathPrefix(`/s65114540192`)"
+      - "traefik.http.middlewares.backend-strip-prefix.stripPrefix.prefixes=/s65114540192"
+      - "traefik.http.routers.backend.middlewares=backend-strip-prefix"
+      - "traefik.http.services.backend.loadbalancer.server.port=10192"
 
   db:
     image: postgres:16
     env_file:
       - .env
-    
     volumes:
       - postgres_data:/var/lib/postgresql/data
     healthcheck:
@@ -31,13 +34,16 @@ services:
       interval: 5s
       timeout: 5s
       retries: 5
+    
+    labels:
+      - "traefik.enable=false"
+
     networks:
-      - mynetwork
+      - traefik-public
+
 volumes:
   postgres_data:
- 
-
 
 networks:
-  mynetwork:
-
+  traefik-public:
+    external: true

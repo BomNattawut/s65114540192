@@ -108,7 +108,7 @@ CHANNEL_LAYERS = {
 }
 
 
-MEDIA_URL = '/media/'
+MEDIA_URL = '/s65114540192/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 ROOT_URLCONF = "backend.urls"
@@ -184,9 +184,16 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
-STATIC_URL = "static/"
+
+FORCE_SCRIPT_NAME = '/s65114540192'
+STATIC_URL = '/s65114540192/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+USE_X_FORWARDED_HOST = True
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '10.0.2.2','51.79.229.204','202.28.49.122','10.80.21.37']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '10.0.2.2','51.79.229.204','202.28.49.122','10.80.21.9','192.168.110.38']
 
